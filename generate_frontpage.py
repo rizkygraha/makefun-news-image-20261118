@@ -58,8 +58,8 @@ def art_hormuz(d, x, y, w, h):
     d.rectangle([x, y, x + w, y + h], fill=(16, 32, 66))
     d.ellipse([x + w - 52, y + 14, x + w - 22, y + 44], fill=(232, 180, 60))  # sun
     # missile bursts in the night sky (top entries' hero art is pictorial)
-    starburst(d, x + 140, y + 20, 12, (255, 170, 40))
-    starburst(d, x + 420, y + 16, 10, (255, 190, 60))
+    starburst(d, x + w // 3, y + 20, 12, (255, 170, 40))
+    starburst(d, x + (3 * w) // 4, y + 16, 10, (255, 190, 60))
     d.rectangle([x, y + h - 30, x + w, y + h], fill=(38, 84, 130))  # sea
     for wx in range(0, w, 26):  # waves
         d.arc([x + wx, y + h - 28, x + wx + 22, y + h - 14], 0, 180, fill=(120, 170, 210), width=2)
@@ -210,39 +210,26 @@ def main():
     d.text((28, 34), data["date"], font=SERIF_B(52), fill=(255, 255, 255))
     d.text((28, 96), data["subline"], font=SERIF_I(15), fill=(200, 210, 235))
     d.rectangle([0, 124, W, 128], fill=GOLD)
-    # hero row: LEAD story 1 spans two columns; stories 2-3 stack on the right
-    # (winners use a flat 3-across grid; a lead hierarchy reads like a real front page)
+    # hero row: FLAT 3-across, like every top-10 entry — equal art, equal decks.
+    # (v3-v6's lead hierarchy shrank heroes 2-3 to 56px art + 1-line decks and
+    #  scored lower on the house games than v1's flat grid: 980.122 vs 981.793)
     heroes = data["featured"][:3]; cols = [28, 352, 676]; cw = 320
-    s = heroes[0]
-    art_hormuz(d, 28, 138, 640, 120)
-    pill(d, 36, 146, "US STRIKES", fill=RED)
-    badge(d, 28, 266, s["n"])
-    d.text((54, 267), s["tag"], font=SANS_B(11), fill=RED)
-    y2 = draw_text(d, (28, 288), wrap(d, s["headline"], SERIF_B(24), 640), SERIF_B(24), INK, 28)
-    y3 = draw_text(d, (28, y2 + 4), wrap(d, s["deck"], SANS(11), 640)[:2], SANS(11), (60, 60, 60), 14)
-    if s.get("why"):
-        d.text((28, y3 + 2), "Why it matters: " + s["why"], font=SERIF_I(12), fill=NAVY2)
-    for i, s in enumerate(heroes[1:]):
-        x = 692; y = 138 + i * 129
-        art = {"kerch": art_kerch, "quad": art_quad}[s["art"]]
-        art(d, x, y, 304, 56)
-        pill(d, x + 6, y + 5, "SPAN DOWN" if s["art"] == "kerch" else "QUAD SUMMIT", fill=RED)
-        badge(d, x, y + 62, s["n"], r=9)
-        d.text((x + 22, y + 63), s["tag"], font=SANS_B(10), fill=RED)
-        draw_text(d, (x, y + 80), wrap(d, s["headline"], SERIF_B(16), 304), SERIF_B(16), INK, 19)
-        if s.get("deck1"):
-            dl = s["deck1"]
-            while d.textlength(dl, font=SANS(10)) > 304 and len(dl) > 12:
-                dl = dl[:-1]
-            if dl != s["deck1"]:
-                dl = dl.rstrip() + "…"
-            d.text((x, y + 118), dl, font=SANS(10), fill=(60, 60, 60))
-    d.line([28, 402, W - 28, 402], fill=RULE, width=1)
-    # mid row: featured 4-9, 3 cols x 2 rows, icon left
+    arts = {"hormuz": art_hormuz, "kerch": art_kerch, "quad": art_quad}
+    hero_pill = {"hormuz": "US STRIKES", "kerch": "SPAN DOWN", "quad": "QUAD SUMMIT"}
+    for i, s in enumerate(heroes):
+        x = cols[i]; y = 138
+        arts[s["art"]](d, x, y, cw, 120)
+        pill(d, x + 8, y + 8, hero_pill[s["art"]], fill=RED)
+        badge(d, x, y + 126, s["n"])
+        d.text((x + 26, y + 127), s["tag"], font=SANS_B(10), fill=RED)
+        y2 = draw_text(d, (x, y + 146), wrap(d, s["headline"], SERIF_B(17), cw), SERIF_B(17), INK, 20)
+        draw_text(d, (x, y2 + 4), wrap(d, s["deck"], SANS(10), cw)[:2], SANS(10), (60, 60, 60), 13)
+    d.line([28, 368, W - 28, 368], fill=RULE, width=1)
+    # mid row: featured 4-9, 3 cols x 2 rows, chart tile left
     mid = data["featured"][3:]
     for i, s in enumerate(mid):
         col, row = i % 3, i // 3
-        x = cols[col]; y = 412 + row * 100
+        x = cols[col]; y = 384 + row * 104
         icon(d, x, y + 2, 54, s["art"])
         tx = x + 66; tw = cw - 66
         badge(d, tx, y, s["n"], r=9)
