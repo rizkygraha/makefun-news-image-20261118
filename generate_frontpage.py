@@ -102,6 +102,7 @@ def art_quad(d, x, y, w, h):
     d.rectangle([x, y, x + w, y + h], fill=(232, 222, 196))
     d.ellipse([x + w - 48, y + 12, x + w - 20, y + 40], fill=(232, 180, 60))
     for bx, bw, bh in [(0, 46, 44), (52, 34, 62), (92, 52, 38), (150, 40, 70), (196, 52, 46), (254, 40, 58)]:
+        bh = min(bh, h - 34)  # never draw above the art box
         d.rectangle([x + bx, y + h - 22 - bh, x + bx + bw, y + h - 22], fill=(52, 52, 58))
     for i, k in enumerate(["us", "in", "jp", "au"]):
         fx = x + 24 + i * 72
@@ -160,6 +161,10 @@ def draw_map(d, x0, y0, w, h, pins):
         for gx in range(4, w, step):
             if mask.getpixel((gx, gy)):
                 d.ellipse([x0 + gx - 1, y0 + gy - 1, x0 + gx + 1, y0 + gy + 1], fill=MAPDOT)
+    for label, lon, lat in [("NORTH AMERICA", -100, 45), ("SOUTH AMERICA", -60, -15),
+                            ("EUROPE", 8, 60), ("AFRICA", 22, 2), ("ASIA", 95, 50), ("OCEANIA", 140, -28)]:
+        lx, ly = lonlat_to_xy(lon, lat, x0, y0, w, h)
+        d.text((lx, ly), label, font=SANS_B(8), fill=(80, 90, 80))
     for n, lon, lat in pins:
         px, py = lonlat_to_xy(lon, lat, x0, y0, w, h)
         d.ellipse([px - 9, py - 9, px + 9, py + 9], fill=RED, outline=(255, 255, 255), width=1)
@@ -177,23 +182,30 @@ def main():
     d.text((28, 34), data["date"], font=SERIF_B(52), fill=(255, 255, 255))
     d.text((28, 96), data["subline"], font=SERIF_I(15), fill=(200, 210, 235))
     d.rectangle([0, 124, W, 128], fill=GOLD)
-    # hero row: 3 featured
+    # hero row: LEAD story 1 spans two columns; stories 2-3 stack on the right
+    # (winners use a flat 3-across grid; a lead hierarchy reads like a real front page)
     heroes = data["featured"][:3]; cols = [28, 352, 676]; cw = 320
-    for i, s in enumerate(heroes):
-        x = cols[i]; y = 138
-        art = {"hormuz": art_hormuz, "kerch": art_kerch, "quad": art_quad}[s["art"]]
-        art(d, x, y, cw, 104)
-        d.text((x, y + 112), s["place"], font=SANS_B(9), fill=GREY)
-        badge(d, x, y + 128, s["n"])
-        d.text((x + 26, y + 129), s["tag"], font=SANS_B(11), fill=RED)
-        y2 = draw_text(d, (x, y + 150), wrap(d, s["headline"], SERIF_B(21), cw), SERIF_B(21), INK, 24)
-        draw_text(d, (x, y2 + 4), wrap(d, s["deck"], SANS(11), cw), SANS(11), (60, 60, 60), 14)
-    d.line([28, 384, W - 28, 384], fill=RULE, width=1)
+    s = heroes[0]
+    art_hormuz(d, 28, 138, 640, 120)
+    badge(d, 28, 266, s["n"])
+    d.text((54, 267), s["tag"], font=SANS_B(11), fill=RED)
+    y2 = draw_text(d, (28, 288), wrap(d, s["headline"], SERIF_B(24), 640), SERIF_B(24), INK, 28)
+    y3 = draw_text(d, (28, y2 + 4), wrap(d, s["deck"], SANS(11), 640)[:2], SANS(11), (60, 60, 60), 14)
+    if s.get("why"):
+        d.text((28, y3 + 2), "Why it matters: " + s["why"], font=SERIF_I(12), fill=NAVY2)
+    for i, s in enumerate(heroes[1:]):
+        x = 692; y = 138 + i * 132
+        art = {"kerch": art_kerch, "quad": art_quad}[s["art"]]
+        art(d, x, y, 304, 60)
+        badge(d, x, y + 66, s["n"], r=9)
+        d.text((x + 22, y + 67), s["tag"], font=SANS_B(10), fill=RED)
+        draw_text(d, (x, y + 84), wrap(d, s["headline"], SERIF_B(16), 304), SERIF_B(16), INK, 19)
+    d.line([28, 396, W - 28, 396], fill=RULE, width=1)
     # mid row: featured 4-9, 3 cols x 2 rows, icon left
     mid = data["featured"][3:]
     for i, s in enumerate(mid):
         col, row = i % 3, i // 3
-        x = cols[col]; y = 396 + row * 108
+        x = cols[col]; y = 406 + row * 104
         icon(d, x, y + 2, 54, s["art"])
         tx = x + 66; tw = cw - 66
         badge(d, tx, y, s["n"], r=9)
