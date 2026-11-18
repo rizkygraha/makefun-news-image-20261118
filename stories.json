@@ -1,0 +1,227 @@
+{
+ "briefs": [
+  [
+   "ASIA",
+   "APEC opens in Shenzhen with Xi keynote"
+  ],
+  [
+   "AFRICA",
+   "Sudan: UN says drones killed 1,630"
+  ],
+  [
+   "AFRICA",
+   "Ethiopia–Eritrea fighting resumes"
+  ],
+  [
+   "MARKETS",
+   "Anthropic to price IPO tonight"
+  ],
+  [
+   "US",
+   "Fed minutes due after Wall St slide"
+  ],
+  [
+   "EUROPE",
+   "UK–EU to align on food rules, FT says"
+  ],
+  [
+   "EUROPE",
+   "Norway rejects Russian security bid"
+  ],
+  [
+   "CLIMATE",
+   "COP31 talks enter their final days"
+  ],
+  [
+   "S. AMERICA",
+   "Brazil protests EU nickel-sale review"
+  ],
+  [
+   "S. AMERICA",
+   "Argentina inflation slows to 1.6%"
+  ],
+  [
+   "AFRICA",
+   "South Africa reprimands Nigeria envoy"
+  ],
+  [
+   "HEALTH",
+   "DR Congo: Ebola adds 400–500 a week"
+  ],
+  [
+   "S. AMERICA",
+   "Brazil weighs ending Enel contract"
+  ],
+  [
+   "ASIA",
+   "Japan scrambles jets on Russian planes"
+  ],
+  [
+   "TECH",
+   "NSA network down; no hack seen"
+  ],
+  [
+   "TECH",
+   "Apple outage hits iCloud and Pay"
+  ],
+  [
+   "OCEANIA",
+   "Australia: ASX falls steeply"
+  ],
+  [
+   "OCEANIA",
+   "Australia: RBA split on holding rates"
+  ],
+  [
+   "SPORT",
+   "Dhoni retires after 19 IPL years"
+  ],
+  [
+   "AFRICA",
+   "Guinea jails 224 in gold-mining crackdown"
+  ],
+  [
+   "MIDDLE EAST",
+   "Gaza warning: truce may collapse"
+  ],
+  [
+   "SPACE",
+   "Voyager 1, one light-day from Earth"
+  ],
+  [
+   "EUROPE",
+   "Estonia to shut Russia border post"
+  ],
+  [
+   "N. AMERICA",
+   "US 10-year yield holds above 5%"
+  ],
+  [
+   "S. AMERICA",
+   "Costa Rica journalist shot dead"
+  ],
+  [
+   "OCEANIA",
+   "Australia: One Nation vows refugee cut"
+  ],
+  [
+   "GLOBAL",
+   "Ukraine toll: 372 killed in October"
+  ]
+ ],
+ "count_line": "36 STORIES · 6 CONTINENTS · ONE PAGE",
+ "date": "Wednesday 18 November 2026",
+ "featured": [
+  {
+   "art": "hormuz",
+   "deck": "US jets hit an Iranian missile site on Qeshm after drones targeted a US radar in Bahrain. Kuwait reports intercepting drones of its own.",
+   "headline": "US and Iran trade fire over Bahrain and Qeshm",
+   "lat": 26,
+   "lon": 51,
+   "n": 1,
+   "place": "",
+   "tag": "MIDDLE EAST · CONFLICT"
+  },
+  {
+   "art": "kerch",
+   "deck": "Kyiv says a second day of strikes destroyed the road arch. Moscow says it downed 1,441 drones; the rail arch stands.",
+   "headline": "A span of the Crimea bridge falls into the sea",
+   "lat": 45,
+   "lon": 36,
+   "n": 2,
+   "place": "",
+   "tag": "EUROPE · WAR IN UKRAINE"
+  },
+  {
+   "art": "quad",
+   "deck": "Talks and a working lunch in Manila, a day after the first Quad summit in two years. A trilateral with Xi and Putin is set for Thursday.",
+   "headline": "Trump meets Marcos, then flies to Shenzhen",
+   "lat": 14,
+   "lon": 121,
+   "n": 3,
+   "place": "",
+   "tag": "ASIA · DIPLOMACY"
+  },
+  {
+   "art": "chip",
+   "deck": "First results since Huang resigned; data-centre sales rose 110%. It forecasts $130bn for next quarter.",
+   "headline": "Nvidia's revenue doubles to $115.8bn",
+   "lat": 37,
+   "lon": -122,
+   "n": 4,
+   "place": "",
+   "tag": "UNITED STATES · BUSINESS"
+  },
+  {
+   "art": "cyclone",
+   "deck": "Heavy rain in Andhra Pradesh; landfall due on 20 November, gusts to 145 km/h. Odisha is moving 200,000 people from the coast.",
+   "headline": "Cyclone Akvan bears down on India's east coast",
+   "lat": 16,
+   "lon": 80,
+   "n": 5,
+   "place": "",
+   "tag": "SOUTH ASIA · WEATHER"
+  },
+  {
+   "art": "parliament",
+   "deck": "Kahana, an ally of Gadi Eisenkot, replaces Amir Ohana after a seven-hour debate. Arab parties' votes proved decisive.",
+   "headline": "Knesset elects Kahana as speaker, 66–52",
+   "lat": 31,
+   "lon": 35,
+   "n": 6,
+   "place": "",
+   "tag": "ISRAEL · POLITICS"
+  },
+  {
+   "art": "euro",
+   "deck": "The loan would cover about two-thirds of Kyiv's 2027 gap and be repaid only if Russia pays reparations.",
+   "headline": "EU proposes a €45bn loan for Ukraine",
+   "lat": 50,
+   "lon": 4,
+   "n": 7,
+   "place": "",
+   "tag": "EUROPE · UKRAINE"
+  },
+  {
+   "art": "sanction",
+   "deck": "Eight Israeli firms and the group Tzav 9 face asset freezes over West Bank settlements.",
+   "headline": "Britain sanctions settlement builders",
+   "lat": 51,
+   "lon": 0,
+   "n": 8,
+   "place": "",
+   "tag": "BRITAIN · SANCTIONS"
+  },
+  {
+   "art": "ship",
+   "deck": "C$400m relief on pork and seafood; steel relief extended. Beijing and Ottawa extend cooperation.",
+   "headline": "China cuts tariffs as Xi meets Carney",
+   "lat": 40,
+   "lon": 116,
+   "n": 9,
+   "place": "",
+   "tag": "CHINA · TRADE"
+  }
+ ],
+ "footer": "All stories happened or were first reported on Wednesday 18 November 2026. Disputed claims are attributed, not stated as fact.  Sources: Reuters · AP · AFP · BBC · Al Jazeera · UN News. Original drawings.",
+ "kicker": "THE DAY IN WORLD NEWS",
+ "numbers": [
+  [
+   "66–52",
+   "Kahana's winning margin for speaker"
+  ],
+  [
+   "$115.8bn",
+   "Nvidia's quarterly revenue, up 103%"
+  ],
+  [
+   "145 km/h",
+   "Akvan's forecast gusts at landfall"
+  ],
+  [
+   "200,000",
+   "People Odisha is moving from the coast"
+  ]
+ ],
+ "subline": "Every story on this page happened, or was first reported, on Wednesday 18 November 2026."
+}
