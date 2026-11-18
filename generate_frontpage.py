@@ -53,10 +53,16 @@ def art_hormuz(d, x, y, w, h):
     d.rectangle([x, y, x + w, y + h], fill=(16, 32, 66))
     d.ellipse([x + w - 52, y + 14, x + w - 22, y + 44], fill=(232, 180, 60))  # sun
     d.rectangle([x, y + h - 30, x + w, y + h], fill=(38, 84, 130))  # sea
-    d.rectangle([x + 24, y + h - 52, x + w - 70, y + h - 30], fill=(28, 28, 32))  # hull
-    for i, c in enumerate([(200, 60, 50), (60, 140, 90), (220, 170, 50), (70, 110, 180), (200, 60, 50), (60, 140, 90)]):
+    for wx in range(0, w, 26):  # waves
+        d.arc([x + wx, y + h - 28, x + wx + 22, y + h - 14], 0, 180, fill=(120, 170, 210), width=2)
+    # tanker: slanted bow, hull, container stacks, white superstructure, funnel
+    d.polygon([(x + 20, y + h - 52), (x + w - 30, y + h - 52), (x + w - 8, y + h - 30), (x + 20, y + h - 30)], fill=(28, 28, 32))
+    for i, c in enumerate([(200, 60, 50), (60, 140, 90), (220, 170, 50), (70, 110, 180)]):
         d.rectangle([x + 34 + i * 34, y + h - 74, x + 62 + i * 34, y + h - 52], fill=c)
-    d.rectangle([x + w - 58, y + h - 78, x + w - 48, y + h - 52], fill=(220, 220, 220))  # bridge tower
+    d.rectangle([x + 176, y + h - 78, x + w - 48, y + h - 52], fill=(235, 235, 235))  # superstructure
+    for wx in range(182, w - 52, 14):
+        d.rectangle([x + wx, y + h - 72, x + wx + 8, y + h - 64], fill=(30, 60, 110))
+    d.rectangle([x + w - 44, y + h - 84, x + w - 34, y + h - 52], fill=(200, 60, 50))  # funnel
     for i in range(4):  # drone trail
         d.ellipse([x + 36 + i * 22, y + 16 + i * 5, x + 42 + i * 22, y + 22 + i * 5], fill=(255, 220, 120))
     d.rectangle([x, y + h - 22, x + w, y + h], fill=(16, 32, 66))
@@ -206,26 +212,30 @@ def main():
     # bottom: map left, briefs right
     y = 678
     d.text((28, y), "WHERE IT HAPPENED", font=SANS_B(12), fill=INK)
-    d.text((404, y), "ALSO ON WEDNESDAY 18 NOVEMBER — 27 MORE STORIES", font=SANS_B(12), fill=INK)
+    briefs = data["briefs"]
+    d.text((404, y), f"ALSO ON WEDNESDAY 18 NOVEMBER — {len(briefs)} MORE STORIES", font=SANS_B(12), fill=INK)
     d.line([28, y + 20, W - 28, y + 20], fill=RED, width=2)
     draw_map(d, 28, y + 30, 360, 252, [(s["n"], s["lon"], s["lat"]) for s in data["featured"]])
     d.text((28, y + 290), "Numbered dots mark stories 1–9.", font=SERIF_I(11), fill=GREY)
-    briefs = data["briefs"]
+    per_col = (len(briefs) + 1) // 2
     for col in range(2):
         x = 404 + col * 306
-        for j in range(14):
-            idx = col * 14 + j
+        for j in range(per_col):
+            idx = col * per_col + j
             if idx >= len(briefs):
                 break
             tag, text = briefs[idx]
-            yy = y + 30 + j * 19
-            d.text((x, yy), f"{10 + idx}", font=SANS_B(11), fill=RED)
+            yy = y + 34 + j * 30
+            d.text((x, yy), f"{10 + idx}", font=SANS_B(13), fill=RED)
             full = text
-            tagw = d.textlength(tag, font=SANS_B(10))
-            while d.textlength(full, font=SANS(10)) > 238 - tagw - 8 and len(full) > 12:
+            tagw = d.textlength(tag, font=SANS_B(11))
+            avail = 300 - 26 - tagw - 8
+            while d.textlength(full, font=SANS(11)) > avail and len(full) > 12:
                 full = full[:-1]
-            d.text((x + 26, yy), tag, font=SANS_B(10), fill=NAVY2)
-            d.text((x + 26 + tagw + 6, yy), "— " + full, font=SANS(10), fill=INK)
+            if full != text:
+                full = full.rstrip() + "…"
+            d.text((x + 28, yy), tag, font=SANS_B(11), fill=NAVY2)
+            d.text((x + 28 + tagw + 6, yy), "— " + full, font=SANS(11), fill=INK)
     # footer
     d.line([28, 992, W - 28, 992], fill=RULE, width=1)
     d.text((28, 998), data["footer"], font=SANS(9), fill=GREY)
