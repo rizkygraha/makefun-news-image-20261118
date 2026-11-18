@@ -71,14 +71,14 @@ def art_hormuz(d, x, y, w, h):
 def art_kerch(d, x, y, w, h):
     d.rectangle([x, y, x + w, y + h], fill=(214, 228, 238))
     d.rectangle([x, y + h - 36, x + w, y + h], fill=(70, 120, 160))
-    # bridge towers and deck, with a gap in the middle
-    d.rectangle([x + 60, y + 18, x + 68, y + 62], fill=(90, 90, 90))
-    d.rectangle([x + w - 68, y + 18, x + w - 60, y + 62], fill=(90, 90, 90))
-    d.rectangle([x, y + 56, x + w // 2 - 22, y + 64], fill=(240, 240, 240))
-    d.rectangle([x + w // 2 + 22, y + 56, x + w, y + 64], fill=(240, 240, 240))
-    d.arc([x + 68, y + 6, x + w - 68, y + 56], 180, 360, fill=(90, 90, 90), width=3)
+    # bridge towers and deck, with a gap in the middle (all heights relative to h)
+    d.rectangle([x + 60, y + 10, x + 68, y + h - 36], fill=(90, 90, 90))
+    d.rectangle([x + w - 68, y + 10, x + w - 60, y + h - 36], fill=(90, 90, 90))
+    d.rectangle([x, y + h - 44, x + w // 2 - 22, y + h - 36], fill=(240, 240, 240))
+    d.rectangle([x + w // 2 + 22, y + h - 44, x + w, y + h - 36], fill=(240, 240, 240))
+    d.arc([x + 68, y + 4, x + w - 68, y + h - 36], 180, 360, fill=(90, 90, 90), width=3)
     # fallen span, diagonal into the water
-    d.polygon([(x + w // 2 - 20, y + 56), (x + w // 2 + 20, y + 56), (x + w // 2 + 52, y + h - 34), (x + w // 2 + 12, y + h - 34)], fill=(150, 150, 150))
+    d.polygon([(x + w // 2 - 20, y + h - 44), (x + w // 2 + 20, y + h - 44), (x + w // 2 + 52, y + h - 6), (x + w // 2 + 12, y + h - 6)], fill=(150, 150, 150))
     d.rectangle([x, y + h - 22, x + w, y + h], fill=(40, 70, 100))
     d.text((x + 10, y + h - 18), "KERCH STRAIT  ·  19 KM CROSSING", font=SANS_B(10), fill=(255, 255, 255))
 
@@ -194,18 +194,25 @@ def main():
     if s.get("why"):
         d.text((28, y3 + 2), "Why it matters: " + s["why"], font=SERIF_I(12), fill=NAVY2)
     for i, s in enumerate(heroes[1:]):
-        x = 692; y = 138 + i * 132
+        x = 692; y = 138 + i * 129
         art = {"kerch": art_kerch, "quad": art_quad}[s["art"]]
-        art(d, x, y, 304, 60)
-        badge(d, x, y + 66, s["n"], r=9)
-        d.text((x + 22, y + 67), s["tag"], font=SANS_B(10), fill=RED)
-        draw_text(d, (x, y + 84), wrap(d, s["headline"], SERIF_B(16), 304), SERIF_B(16), INK, 19)
-    d.line([28, 396, W - 28, 396], fill=RULE, width=1)
+        art(d, x, y, 304, 56)
+        badge(d, x, y + 62, s["n"], r=9)
+        d.text((x + 22, y + 63), s["tag"], font=SANS_B(10), fill=RED)
+        draw_text(d, (x, y + 80), wrap(d, s["headline"], SERIF_B(16), 304), SERIF_B(16), INK, 19)
+        if s.get("deck1"):
+            dl = s["deck1"]
+            while d.textlength(dl, font=SANS(10)) > 304 and len(dl) > 12:
+                dl = dl[:-1]
+            if dl != s["deck1"]:
+                dl = dl.rstrip() + "…"
+            d.text((x, y + 118), dl, font=SANS(10), fill=(60, 60, 60))
+    d.line([28, 402, W - 28, 402], fill=RULE, width=1)
     # mid row: featured 4-9, 3 cols x 2 rows, icon left
     mid = data["featured"][3:]
     for i, s in enumerate(mid):
         col, row = i % 3, i // 3
-        x = cols[col]; y = 406 + row * 104
+        x = cols[col]; y = 412 + row * 100
         icon(d, x, y + 2, 54, s["art"])
         tx = x + 66; tw = cw - 66
         badge(d, tx, y, s["n"], r=9)

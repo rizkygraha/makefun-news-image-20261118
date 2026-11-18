@@ -2,7 +2,7 @@
  "briefs": [
   [
    "ASIA",
-   "APEC opens in Shenzhen with Xi keynote"
+   "APEC opens in Shenzhen — Xi gives keynote"
   ],
   [
    "AFRICA",
@@ -14,7 +14,7 @@
   ],
   [
    "MARKETS",
-   "Anthropic to price IPO tonight"
+   "Anthropic to price IPO tonight — $70–78 a share"
   ],
   [
    "US",
@@ -38,11 +38,11 @@
   ],
   [
    "ASIA",
-   "Japan scrambles jets on Russian planes"
+   "Japan scrambles jets — two Russian planes"
   ],
   [
    "TECH",
-   "NSA network down; no hack seen"
+   "NSA network down — no hack seen"
   ],
   [
    "TECH",
@@ -58,11 +58,11 @@
   ],
   [
    "MIDDLE EAST",
-   "Gaza warning: truce may collapse"
+   "Gaza warning — truce may collapse"
   ],
   [
    "SPACE",
-   "Voyager 1, one light-day from Earth"
+   "Voyager 1 — first craft one light-day out"
   ],
   [
    "EUROPE",
@@ -70,7 +70,7 @@
   ],
   [
    "GLOBAL",
-   "Ukraine toll: 372 killed in October"
+   "Ukraine toll — 372 killed in October"
   ]
  ],
  "count_line": "27 STORIES · 6 CONTINENTS · ONE PAGE",
@@ -95,7 +95,8 @@
    "lon": 36,
    "n": 2,
    "place": "",
-   "tag": "EUROPE · WAR IN UKRAINE"
+   "tag": "EUROPE · WAR IN UKRAINE",
+   "deck1": "Kyiv: second day of strikes destroyed the road arch."
   },
   {
    "art": "quad",
@@ -105,7 +106,8 @@
    "lon": 121,
    "n": 3,
    "place": "",
-   "tag": "ASIA · DIPLOMACY"
+   "tag": "ASIA · DIPLOMACY",
+   "deck1": "Working lunch in Manila; trilateral set for Thursday."
   },
   {
    "art": "chip",
